@@ -6,7 +6,7 @@ class AsyncMetaclass(type):
             obj = await cls.__new__(cls, *args, **kwargs)
         else:
             obj = cls.__new__(cls, *args, **kwargs)
-        if inspect.iscoroutinefunction(cls.__init__):
+        if inspect.iscoroutinefunction(obj.__init__):
             await obj.__init__(*args, **kwargs)
         else:
             obj.__init__(*args, **kwargs)
