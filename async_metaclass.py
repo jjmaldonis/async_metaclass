@@ -3,6 +3,9 @@ import asyncio
 class AsyncMetaclass(type):
     async def __call__(cls, *args, **kwargs):
         obj = super(AsyncMetaclass, cls).__call__()
+        # The below two lines are an alternative to the above line, so you can optionally not call `obj.__init__` and only call `obj.__asyncinit__` if you'd like
+        #obj = cls.__new__(cls)
+        #obj.__init__()
         await obj.__asyncinit__(*args, **kwargs)
         return obj
 
